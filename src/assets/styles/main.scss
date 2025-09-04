@@ -1,0 +1,101 @@
+@use "@/assets/styles/variables" as *;
+
+* {
+  font-family: $font-main;
+  border: 0;
+  margin: 0;
+}
+
+body {
+  color: $color-primary;
+}
+
+// Header
+
+.header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $color-light;
+  padding: 0.8rem 2rem;
+  /* background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px); */
+
+  .header-logo {
+    font-family: $font-heading;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-gray-light-ultra;
+    }
+  }
+
+  .header-nav-links {
+    display: flex;
+    gap: 2.5rem;
+    text-transform: uppercase;
+    font-family: $font-main;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+
+    .header-nav-link {
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 400;
+      transition: font-weight 0.3s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 1px;
+        background-color: currentColor;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        font-weight: 400;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .header-buy-button {
+    margin-left: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: $color-gray-light-ultra;
+    color: $color-dark;
+    border-radius: 9999px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    width: 7rem;
+    height: 2rem;
+
+    &:hover {
+      background-color: $color-light;
+      color: $color-gray-dark;
+      transform: scale(1.01);
+    }
+  }
+}

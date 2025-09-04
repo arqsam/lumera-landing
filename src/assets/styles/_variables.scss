@@ -1,0 +1,33 @@
+// Colors
+$color-primary: #2c2c2c;
+$color-secondary: #be8e6b;
+$color-accent: #96a9fd;
+
+$color-dark: #111;
+$color-light: #f9fafb;
+
+$color-gray-dark: #303030;
+$color-gray-medium: #6d6d6d;
+$color-gray-light: #b3b3b3;
+$color-gray-light-ultra: #cfcfcf;
+
+// Typography
+$font-heading: "Libre Baskerville", serif;
+$font-main: "Inter", sans-serif;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 2rem;
+$spacing-lg: 4rem;
+
+// Shadows
+$shadow-elevated: 0 10px 25px rgba(0, 0, 0, 0.1);
+$shadow-color-light: rgba(0, 0, 0, 0.2);
+$shadow-color-medium: rgba(0, 0, 0, 0.4);
