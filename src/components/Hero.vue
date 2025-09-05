@@ -58,7 +58,7 @@ onMounted(async () => {
 
 <template>
   <Header />
-  <section class="hero-section">
+  <section id="hero" class="hero-section">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="/videos/skincare_02.mp4" type="video/mp4" />
       Tu navegador no soporta el video.
