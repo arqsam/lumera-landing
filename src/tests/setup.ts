@@ -14,6 +14,14 @@ vi.mock("gsap", () => {
   };
 });
 
+// Mock de IntersectionObserver (no disponible en JSDOM)
+const mockIntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+window.IntersectionObserver = mockIntersectionObserver;
+
 // Limpiar los mocks antes de cada test
 beforeEach(() => {
   vi.clearAllMocks();
