@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, nextTick } from "vue";
 import { gsap } from "gsap";
-import Header from "./Header.vue";
 
 onMounted(async () => {
   await nextTick();
@@ -31,7 +30,7 @@ onMounted(async () => {
       duration: 1.4,
       ease: "power2.out",
       delay: 0.9,
-    }
+    },
   );
 
   const button = document.querySelector(".hero-button");
@@ -57,7 +56,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Header />
   <section id="hero" class="hero-section">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="/videos/skincare_02.mp4" type="video/mp4" />

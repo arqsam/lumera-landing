@@ -9,6 +9,7 @@ vi.mock("gsap", () => {
       from: vi.fn(),
       fromTo: vi.fn(),
       to: vi.fn(),
+      set: vi.fn(),
     },
   };
 });
