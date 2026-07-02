@@ -1,60 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick } from "vue";
+import { ref, watch, nextTick } from "vue";
 import { gsap } from "gsap";
 import {
   EllipsisVerticalIcon,
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
+import { useHeaderVisibility } from "../composables/useHeaderVisibility";
 
-const isVisible = ref(false);
-const hasAppeared = ref(false);
+const { isVisible } = useHeaderVisibility();
 const showHeader = ref(false);
 const isMenuOpen = ref(false);
 
 const closeMenu = () => {
   isMenuOpen.value = false;
 };
-
-onMounted(() => {
-  if (window.innerWidth < 768) {
-    //Mobile: aparece con un pequeño delay
-    setTimeout(() => {
-      isVisible.value = true;
-    }, 800);
-
-    // o cuando el usuario empieza a scrollear
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 30) {
-        isVisible.value = true;
-      } else {
-        isVisible.value = false;
-      }
-    });
-  } else {
-    // Desktop: primer hover en el botón del hero
-    const triggerBtn = document.querySelector(".hero-button");
-    if (triggerBtn) {
-      triggerBtn.addEventListener("mouseenter", () => {
-        if (!hasAppeared.value) {
-          hasAppeared.value = true;
-          isVisible.value = true;
-        }
-      });
-    }
-
-    // control por scroll
-    window.addEventListener("scroll", () => {
-      if (!hasAppeared.value) return;
-
-      const hero = document.querySelector("#hero");
-      if (!hero) return;
-
-      const rect = hero.getBoundingClientRect();
-      isVisible.value = rect.bottom > 0 && rect.top < window.innerHeight;
-    });
-  }
-});
 
 watch(isVisible, (visible) => {
   if (visible) {
