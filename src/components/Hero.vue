@@ -2,6 +2,11 @@
 import { onMounted, nextTick } from "vue";
 import { gsap } from "gsap";
 
+const scrollToTienda = () => {
+  const tienda = document.querySelector("#tienda");
+  tienda?.scrollIntoView({ behavior: "smooth" });
+};
+
 onMounted(async () => {
   await nextTick();
 
@@ -78,7 +83,9 @@ onMounted(async () => {
     </div>
 
     <div class="hero-button-wrapper">
-      <button class="hero-button">Explorar productos</button>
+      <button class="hero-button" @click="scrollToTienda">
+        Explorar productos
+      </button>
     </div>
 
     <div class="hero-background-circle"></div>

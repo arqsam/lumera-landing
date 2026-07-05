@@ -12,6 +12,11 @@ body {
 
 // Header
 
+html {
+  scroll-behavior: smooth;
+}
+
+// Header base
 .header-nav {
   position: fixed;
   top: 0;
@@ -23,8 +28,10 @@ body {
   align-items: center;
   color: $color-light;
   padding: 0.8rem 2rem;
-  /* background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px); */
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease;
 
   .desktop-only {
     display: none;
@@ -62,10 +69,11 @@ body {
       display: none;
     }
   }
-  /* Drawer móvil */
+
   .aside {
     width: 100%;
   }
+
   .mobile-menu {
     position: fixed;
     top: 0;
@@ -92,9 +100,10 @@ body {
     font-weight: 400;
     letter-spacing: 0.05em;
     text-align: center;
+
     .header-nav-link {
-      display: inline-block; // ajusta ancho al texto
-      margin: 0 auto; // centra en columna
+      display: inline-block;
+      margin: 0 auto;
       position: relative;
       text-decoration: none;
       color: inherit;
@@ -118,7 +127,6 @@ body {
     }
   }
 
-  /* Transición del menú */
   .slide-fade-enter-active,
   .slide-fade-leave-active {
     transition: all 0.4s ease;
@@ -157,7 +165,7 @@ body {
       text-decoration: none;
       color: inherit;
       font-weight: 400;
-      transition: font-weight 0.3s ease;
+      transition: color 0.3s ease;
 
       &::after {
         content: "";
@@ -170,15 +178,12 @@ body {
         transition: width 0.3s ease;
       }
 
-      &:hover {
-        font-weight: 400;
-
-        &::after {
-          width: 100%;
-        }
+      &:hover::after {
+        width: 100%;
       }
     }
   }
+
   @media (min-width: 768px) {
     .header-nav-links {
       display: flex;
@@ -205,11 +210,13 @@ body {
       transform: scale(1.01);
     }
   }
+
   @media (min-width: 768px) {
     .header-buy-button {
       display: flex;
     }
   }
+
   .mobile-buy {
     padding: 1rem 2.7rem;
     background-color: $color-dark;
@@ -222,6 +229,7 @@ body {
     width: 7rem;
     height: 2.3rem;
   }
+
   .mobile-close {
     margin-left: 1.5rem;
     padding: 1rem 0.8rem;
@@ -234,5 +242,33 @@ body {
     transition: all 0.3s ease-in-out;
     width: 3rem;
     height: auto;
+  }
+}
+
+// Header scrolled — selector hermano
+.header-nav.header-nav--scrolled {
+  /*   background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px); */
+  /* box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08); */
+  color: $color-primary;
+
+  .header-logo,
+  .header-nav-link,
+  .header-nav-links {
+    color: $color-primary;
+  }
+
+  .header-buy-button {
+    background-color: $color-primary;
+    color: $color-light;
+
+    &:hover {
+      background-color: $color-gray-dark;
+    }
+  }
+
+  .header-menu-button {
+    color: $color-primary;
+    background-color: rgba(0, 0, 0, 0.06);
   }
 }
