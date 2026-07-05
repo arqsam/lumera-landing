@@ -3,20 +3,30 @@ import { ref, onMounted, onUnmounted } from "vue";
 export function useHeaderVisibility() {
   const isVisible = ref(false);
   const hasAppeared = ref(false);
+  const isPastHero = ref(false);
 
-  let observer: IntersectionObserver | null = null;
-  let scrollHandler: (() => void) | null = null;
+  let visibilityObserver: IntersectionObserver | null = null;
+  let styleObserver: IntersectionObserver | null = null;
+  let scrollHandler: ((...args: unknown[]) => void) | null = null;
 
   const show = () => {
     isVisible.value = true;
     hasAppeared.value = true;
   };
 
-  const hide = () => {
-    isVisible.value = false;
-  };
-
   onMounted(() => {
+    const hero = document.querySelector("#hero");
+
+    // Observer 1: controla el ESTILO del header (transparente vs blur)
+    // Se activa siempre, independiente de si ya apareció
+    styleObserver = new IntersectionObserver(
+      (entries) => {
+        isPastHero.value = !entries[0].isIntersecting;
+      },
+      { threshold: 0.05 },
+    );
+    if (hero) styleObserver.observe(hero);
+
     if (window.innerWidth < 768) {
       // Mobile: aparece con delay o al hacer scroll
       setTimeout(() => show(), 800);
@@ -24,51 +34,45 @@ export function useHeaderVisibility() {
       scrollHandler = () => {
         if (window.scrollY > 30) {
           show();
-        } else {
-          hide();
         }
+        // En mobile nunca se oculta una vez que apareció
       };
       window.addEventListener("scroll", scrollHandler);
     } else {
       // Desktop: primera aparición solo con hover en hero-button
-      // Después se controla por IntersectionObserver del hero
       const triggerBtn = document.querySelector(".hero-button");
 
       const onHoverTrigger = () => {
         if (!hasAppeared.value) {
           show();
-
-          // Una vez que apareció, controlar visibilidad por viewport
-          const hero = document.querySelector("#hero");
-          observer = new IntersectionObserver(
-            (entries) => {
-              const entry = entries[0];
-              if (entry.isIntersecting) {
-                show();
-              } else {
-                hide();
-              }
-            },
-            { threshold: 0.1 },
-          );
-
-          if (hero) {
-            observer.observe(hero);
-          }
-
-          // Ya no necesitamos el listener de hover
           triggerBtn?.removeEventListener("mouseenter", onHoverTrigger);
+
+          // Observer 2: controla VISIBILIDAD solo después de primera aparición
+          // Una vez que apareció, el header NUNCA desaparece — solo cambia de estilo
+          // No necesitamos observer de visibilidad adicional
         }
       };
 
       triggerBtn?.addEventListener("mouseenter", onHoverTrigger);
+
+      // Si el usuario scrollea sin hacer hover, el header aparece al salir del hero
+      scrollHandler = () => {
+        if (!hasAppeared.value && window.scrollY > window.innerHeight * 0.5) {
+          show();
+        }
+      };
+      window.addEventListener("scroll", scrollHandler);
     }
   });
 
   onUnmounted(() => {
-    if (observer) {
-      observer.disconnect();
-      observer = null;
+    if (visibilityObserver) {
+      visibilityObserver.disconnect();
+      visibilityObserver = null;
+    }
+    if (styleObserver) {
+      styleObserver.disconnect();
+      styleObserver = null;
     }
     if (scrollHandler) {
       window.removeEventListener("scroll", scrollHandler);
@@ -76,5 +80,5 @@ export function useHeaderVisibility() {
     }
   });
 
-  return { isVisible, hasAppeared };
+  return { isVisible, hasAppeared, isPastHero };
 }
