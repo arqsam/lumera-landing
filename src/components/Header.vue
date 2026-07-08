@@ -8,7 +8,7 @@ import {
 } from "@heroicons/vue/24/outline";
 import { useHeaderVisibility } from "../composables/useHeaderVisibility";
 
-const { isVisible, isPastHero } = useHeaderVisibility();
+const { isVisible, isPastHero, isDarkSection } = useHeaderVisibility();
 const showHeader = ref(false);
 const isMenuOpen = ref(false);
 
@@ -46,7 +46,11 @@ watch(isVisible, (visible) => {
   <header
     v-if="showHeader"
     class="header-nav"
-    :class="{ 'header-nav--scrolled': isPastHero }"
+    :class="{
+      'header-nav--scrolled': isPastHero,
+      'header-nav--dark': isDarkSection,
+      'header-nav--light': !isDarkSection,
+    }"
   >
     <a href="#hero" class="header-logo">Lumera</a>
     <nav class="header-nav-links desktop-only">

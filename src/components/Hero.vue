@@ -2,9 +2,9 @@
 import { onMounted, nextTick } from "vue";
 import { gsap } from "gsap";
 
-const scrollToTienda = () => {
-  const tienda = document.querySelector("#tienda");
-  tienda?.scrollIntoView({ behavior: "smooth" });
+const scrollToNext = () => {
+  const target = document.querySelector("#filosofia");
+  target?.scrollIntoView({ behavior: "smooth" });
 };
 
 onMounted(async () => {
@@ -61,7 +61,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section id="hero" class="hero-section">
+  <section id="hero" data-theme="dark" class="hero-section">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="/videos/skincare_02.mp4" type="video/mp4" />
       Tu navegador no soporta el video.
@@ -83,15 +83,21 @@ onMounted(async () => {
     </div>
 
     <div class="hero-button-wrapper">
-      <button class="hero-button" @click="scrollToTienda">
-        Explorar productos
-      </button>
+      <button class="hero-button" @click="scrollToNext">Descubrir</button>
     </div>
 
     <div class="hero-background-circle"></div>
   </section>
 </template>
 <style scoped lang="scss">
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  color: $color-light;
+}
 .hero-section {
   position: relative;
   height: 100vh;

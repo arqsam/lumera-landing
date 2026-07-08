@@ -4,9 +4,11 @@ export function useHeaderVisibility() {
   const isVisible = ref(false);
   const hasAppeared = ref(false);
   const isPastHero = ref(false);
+  const isDarkSection = ref(true); // hero es dark por defecto
 
   let visibilityObserver: IntersectionObserver | null = null;
   let styleObserver: IntersectionObserver | null = null;
+  let themeObserver: IntersectionObserver | null = null;
   let scrollHandler: ((...args: unknown[]) => void) | null = null;
 
   const show = () => {
@@ -26,6 +28,22 @@ export function useHeaderVisibility() {
       { threshold: 0.05 },
     );
     if (hero) styleObserver.observe(hero);
+
+    // Observer 2: detecta qué sección está en el viewport
+    // y lee su data-theme para adaptar el color del header
+    const sections = document.querySelectorAll("section[data-theme]");
+    themeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const theme = (entry.target as HTMLElement).dataset.theme;
+            isDarkSection.value = theme === "dark";
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    sections.forEach((section) => themeObserver!.observe(section));
 
     if (window.innerWidth < 768) {
       // Mobile: aparece con delay o al hacer scroll
@@ -74,11 +92,15 @@ export function useHeaderVisibility() {
       styleObserver.disconnect();
       styleObserver = null;
     }
+    if (themeObserver) {
+      themeObserver.disconnect();
+      themeObserver = null;
+    }
     if (scrollHandler) {
       window.removeEventListener("scroll", scrollHandler);
       scrollHandler = null;
     }
   });
 
-  return { isVisible, hasAppeared, isPastHero };
+  return { isVisible, hasAppeared, isPastHero, isDarkSection };
 }
