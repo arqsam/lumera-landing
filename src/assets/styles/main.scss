@@ -245,17 +245,44 @@ html {
   }
 }
 
-// Header scrolled — selector hermano
-.header-nav.header-nav--scrolled {
-  /*   background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(12px); */
-  /* box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08); */
+// Sobre sección oscura — texto claro
+.header-nav.header-nav--dark {
+  color: $color-light;
+
+  .header-logo,
+  .header-nav-link,
+  .header-nav-links {
+    color: $color-light;
+    transition: color 0.4s ease;
+  }
+
+  .header-buy-button {
+    background-color: $color-gray-light-ultra;
+    color: $color-dark;
+  }
+
+  .header-menu-button {
+    color: $color-light;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Sobre sección clara — texto oscuro con blur
+.header-nav.header-nav--light {
+  /*   background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08); */
   color: $color-primary;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease;
 
   .header-logo,
   .header-nav-link,
   .header-nav-links {
     color: $color-primary;
+    transition: color 0.4s ease;
   }
 
   .header-buy-button {

@@ -79,7 +79,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section id="tienda" class="tienda-section">
+  <section id="tienda" data-theme="light" class="tienda-section">
     <div class="tienda-header">
       <h2 class="tienda-title">Nuestra Tienda</h2>
       <p class="tienda-subtitle">
