@@ -401,7 +401,7 @@ onUnmounted(() => {
   justify-content: center;
 
   @media (min-width: $breakpoint-lg) {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 }
 

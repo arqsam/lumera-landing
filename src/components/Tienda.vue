@@ -17,29 +17,29 @@ interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: "Sérum Luminoso",
+    name: "Radiance Elixir",
     description:
       "Vitamina C estabilizada para una piel radiante desde el primer uso.",
     price: "$890",
-    image: "/images/product_01.jpg",
+    image: "/images/product_01.png",
     alt: "Sérum luminoso Lumera con vitamina C",
   },
   {
     id: 2,
-    name: "Ritual Dorado",
+    name: "Nourishing Facial Oil",
     description:
       "Aceite facial con extractos botánicos para nutrir e iluminar.",
     price: "$1,200",
-    image: "/images/woman_yellow.jpg",
+    image: "/images/product_02.png",
     alt: "Modelo aplicando el ritual dorado Lumera",
   },
   {
     id: 3,
-    name: "Crema Calma",
+    name: "Hidrating Water Cream",
     description:
       "Hidratación profunda con ácido hialurónico y aloe vera orgánico.",
     price: "$750",
-    image: "/images/product_01.jpg",
+    image: "/images/product_03.png",
     alt: "Crema calmante Lumera con aloe vera",
   },
 ];

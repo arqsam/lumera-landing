@@ -25,9 +25,9 @@ describe("Tienda.vue", () => {
   it("cada card tiene nombre, descripción, precio y botón", () => {
     render(Tienda);
 
-    expect(screen.getByText(/sérum luminoso/i)).toBeInTheDocument();
-    expect(screen.getByText(/ritual dorado/i)).toBeInTheDocument();
-    expect(screen.getByText(/crema calma/i)).toBeInTheDocument();
+    expect(screen.getByText(/radiance elixir/i)).toBeInTheDocument();
+    expect(screen.getByText(/nourishing facial oil/i)).toBeInTheDocument();
+    expect(screen.getByText(/hidrating water cream/i)).toBeInTheDocument();
 
     const buttons = screen.getAllByRole("button", { name: /ver producto/i });
     expect(buttons.length).toBe(3);
