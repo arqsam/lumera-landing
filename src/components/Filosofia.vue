@@ -322,8 +322,8 @@ onUnmounted(() => {
   padding: $spacing-sm $spacing-sm;
   border: none;
   border-radius: 0.75rem;
-  background-color: rgba(20, 20, 20, 0.19);
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -354,7 +354,8 @@ onUnmounted(() => {
   }
 
   &:hover {
-    background-color: rgba(40, 40, 40, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
     box-shadow:
       0 0 30px rgba(255, 255, 255, 0.04),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
