@@ -31,7 +31,50 @@ const columna3 = [
 ];
 
 onMounted(() => {
-  // Parallax por columna — velocidades distintas
+  const titulo = document.querySelector(
+    ".galeria-titulo-wrapper",
+  ) as HTMLElement;
+
+  // Entrada del título cuando la sección llega al viewport
+  gsap.from(titulo, {
+    opacity: 0,
+    y: 40,
+    duration: 1.2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#galeria",
+      start: "top 60%",
+      once: true,
+    },
+  });
+
+  // Título aparece cuando la sección entra
+  gsap.to(titulo, {
+    opacity: 1,
+    duration: 0.8,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#galeria",
+      start: "top center",
+      end: "top 20%",
+      scrub: 1,
+    },
+  });
+
+  // Título desaparece antes de llegar a Gaceta
+  gsap.to(titulo, {
+    opacity: 0,
+    duration: 0.8,
+    ease: "power2.in",
+    scrollTrigger: {
+      trigger: "#galeria",
+      start: "75% center",
+      end: "93% center",
+      scrub: 1,
+    },
+  });
+
+  // Parallax por columna — sin cambios
   gsap.to(".galeria-col--1", {
     y: -80,
     ease: "none",
@@ -123,18 +166,20 @@ onUnmounted(() => {
 .galeria-section {
   background-color: $color-light;
   position: relative;
-  // Sin overflow hidden para que el sticky funcione
+  overflow: hidden;
 }
 
-// Título sticky — flota encima, acompaña el scroll
 .galeria-titulo-wrapper {
-  position: sticky;
-  top: 40%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 10;
   text-align: center;
   pointer-events: none;
-  margin-bottom: -200px;
+  width: 100%;
   padding: 0 $spacing-md;
+  opacity: 0; // GSAP lo muestra
 }
 
 .galeria-eyebrow {
@@ -144,7 +189,7 @@ onUnmounted(() => {
   font-weight: 400;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: $color-primary;
+  color: $color-light;
   margin-bottom: 0.5rem;
   text-shadow: 0 1px 8px rgba(255, 255, 255, 0.6);
 }
