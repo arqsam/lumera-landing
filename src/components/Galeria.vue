@@ -121,7 +121,7 @@ onUnmounted(() => {
       <span class="galeria-eyebrow">Galería</span>
       <h2 class="galeria-title">
         Lumera<br />
-        <em class="galeria-title--italic">en cada momento.</em>
+        <!-- <em class="galeria-title--italic">en cada momento.</em> -->
       </h2>
     </div>
 

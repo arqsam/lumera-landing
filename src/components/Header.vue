@@ -40,6 +40,12 @@ watch(isVisible, (visible) => {
     });
   }
 });
+
+const irATienda = () => {
+  const tienda = document.querySelector("#tienda");
+  tienda?.scrollIntoView({ behavior: "smooth" });
+  if (isMenuOpen.value) closeMenu();
+};
 </script>
 
 <template>
@@ -54,13 +60,17 @@ watch(isVisible, (visible) => {
   >
     <a href="#hero" class="header-logo">Lumera</a>
     <nav class="header-nav-links desktop-only">
-      <a href="#tienda" class="header-nav-link">Tienda</a>
       <a href="#filosofia" class="header-nav-link">Filosofía</a>
+      <a href="#tienda" class="header-nav-link">Tienda</a>
       <a href="#galeria" class="header-nav-link">Galería</a>
       <a href="#gaceta" class="header-nav-link">Gaceta</a>
     </nav>
 
-    <button class="header-buy-button desktop-only" aria-label="bag">
+    <button
+      class="header-buy-button desktop-only"
+      aria-label="bag"
+      @click="irATienda"
+    >
       <div style="width: 23px; height: auto">
         <ShoppingBagIcon class="size-6 text-black" />
       </div>
@@ -84,15 +94,15 @@ watch(isVisible, (visible) => {
           <XMarkIcon class="size-6" />
         </button>
         <nav class="mobile-nav-links">
-          <a href="#tienda" class="header-nav-link">Tienda</a>
           <a href="#filosofia" class="header-nav-link">Filosofía</a>
+          <a href="#tienda" class="header-nav-link">Tienda</a>
           <a href="#galeria" class="header-nav-link">Galería</a>
           <a href="#gaceta" class="header-nav-link">Gaceta</a>
           <div style="display: flex; justify-content: center">
             <button
               class="header-buy-button mobile-buy"
               style="margin-top: 2rem"
-              @click="closeMenu"
+              @click="irATienda"
             >
               <ShoppingBagIcon class="size-6" />
             </button>
