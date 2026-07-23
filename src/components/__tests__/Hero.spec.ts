@@ -13,14 +13,14 @@ describe("Hero.vue", () => {
       name: /Ilumina tu rutina/i,
     });
     const subtitle = await screen.findByText(
-      /Tecnología para el cuidado de tu piel/i
+      /Tecnología para el cuidado de tu piel/i,
     );
     expect(title).toBeInTheDocument();
     expect(subtitle).toBeInTheDocument();
 
     // Botón
     const button = await screen.findByRole("button", {
-      name: /Explorar productos/i,
+      name: /Descubrir/i,
     });
     expect(button).toBeInTheDocument();
   });
@@ -28,7 +28,7 @@ describe("Hero.vue", () => {
   it("incluye el video de fondo con atributos correctos", async () => {
     const { container } = render(Hero);
     const video = container.querySelector(
-      "video.hero-video"
+      "video.hero-video",
     ) as HTMLVideoElement;
     expect(video).toBeTruthy();
 
@@ -63,12 +63,12 @@ describe("Hero.vue", () => {
     expect(gsap.from).toHaveBeenCalledWith(".hero-title", expect.any(Object));
     expect(gsap.from).toHaveBeenCalledWith(
       ".hero-subtitle",
-      expect.any(Object)
+      expect.any(Object),
     );
     expect(gsap.fromTo).toHaveBeenCalledWith(
       ".hero-button",
       expect.any(Object),
-      expect.any(Object)
+      expect.any(Object),
     );
   });
 });
