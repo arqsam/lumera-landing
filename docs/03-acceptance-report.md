@@ -17,8 +17,8 @@ Leyenda: ✅ Cumplido · 🟡 Cumplido con desviación documentada · ⬜ Pendie
 | ID | Criterio | Estado | Evidencia / cómo verificar |
 |---|---|---|---|
 | CS-01 | Lighthouse ≥ 85 (Performance, Accessibility, Best Practices) | ⬜ | Correr Lighthouse (DevTools o PageSpeed Insights) sobre la URL de producción en móvil y escritorio y pegar los 3 puntajes. Antes de esta rama `public/` pesaba 40 MB; ahora 1.83 MB (ver sección 4). |
-| CS-02 | `vue-tsc -b` sin errores | ⬜ | `npm ci && npm run build` → pegar la salida. |
-| CS-03 | `vitest --run` sin fallos | ⬜ | `npm test` → pegar el resumen (archivos, tests, fallos). Se modificó una aserción en `Header.spec.ts` (etiqueta del botón de tienda). |
+| CS-02 | `vue-tsc -b` sin errores | ✅ en v1.0.0 · ⬜ en esta rama | **Línea base (v1.0.0, ejecutado por el autor el 2026-10-16, Windows):** `npm run build` → `vue-tsc -b` sin errores; Vite 7.0.6 transformó 369 módulos; JS 209.14 kB (gzip 80.90 kB), CSS 34.35 kB (gzip 6.18 kB), compilado en 2.77 s. **Pendiente:** repetir `npm ci && npm run build` sobre la rama y pegar la salida. |
+| CS-03 | `vitest --run` sin fallos | ✅ en v1.0.0 · ⬜ en esta rama | **Línea base (v1.0.0, ejecutado por el autor el 2026-10-16, Windows):** Vitest 3.2.4, 7 archivos y 39 tests, todos pasan (5.10 s). **Pendiente:** repetir `npm test` sobre la rama; se modificó una aserción en `Header.spec.ts` (etiqueta del botón de tienda). |
 | CS-04 | Sin caracteres con encoding roto | ✅ | Búsqueda de patrones de texto mal codificado (`Ã±`, `Ã­`, `â€`…) en `src/`, `index.html` y `README.md`: sin coincidencias. Las únicas ocurrencias están en `docs/00-audit.md`, como ejemplos del problema original. |
 
 ## 2. Funcionalidad
