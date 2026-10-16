@@ -6,28 +6,28 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const columna1 = [
-  { src: "/images/model_01.png", alt: "Modelo Lumera con piel luminosa" },
-  { src: "/images/product_01.png", alt: "Radiance Elixir Lumera" },
-  { src: "/images/model_05.png", alt: "Dos modelos Lumera" },
-  { src: "/images/product_04.png", alt: "Mattifying Mineral Sunscreen Lumera" },
-  { src: "/images/model_02.png", alt: "Modelo Lumera con piel radiante" },
-  { src: "/images/product_05.png", alt: "Hydrating Repair Cream Lumera" },
+  { src: "/images/model_01.webp", alt: "Modelo Lumera con piel luminosa" },
+  { src: "/images/product_01.webp", alt: "Radiance Elixir Lumera" },
+  { src: "/images/model_05.webp", alt: "Dos modelos Lumera" },
+  { src: "/images/product_04.webp", alt: "Mattifying Mineral Sunscreen Lumera" },
+  { src: "/images/model_02.webp", alt: "Modelo Lumera con piel radiante" },
+  { src: "/images/product_05.webp", alt: "Hydrating Repair Cream Lumera" },
 ];
 
 const columna2 = [
-  { src: "/images/product_02.png", alt: "Nourishing Facial Oil Lumera" },
-  { src: "/images/model_03.png", alt: "Modelo aplicando crema Lumera" },
-  { src: "/images/product_01.png", alt: "Radiance Elixir Lumera" },
-  { src: "/images/model_04.png", alt: "Modelo aplicando sérum Lumera" },
-  { src: "/images/model_01.png", alt: "Modelo Lumera con piel luminosa" },
+  { src: "/images/product_02.webp", alt: "Nourishing Facial Oil Lumera" },
+  { src: "/images/model_03.webp", alt: "Modelo aplicando crema Lumera" },
+  { src: "/images/product_01.webp", alt: "Radiance Elixir Lumera" },
+  { src: "/images/model_04.webp", alt: "Modelo aplicando sérum Lumera" },
+  { src: "/images/model_01.webp", alt: "Modelo Lumera con piel luminosa" },
 ];
 
 const columna3 = [
-  { src: "/images/product_05.png", alt: "Hydrating Repair Cream Lumera" },
-  { src: "/images/model_02.png", alt: "Modelo Lumera con piel radiante" },
-  { src: "/images/product_03.png", alt: "Hydrating Water Cream Lumera" },
-  { src: "/images/model_05.png", alt: "Modelos Lumera" },
-  { src: "/images/product_02.png", alt: "Nourishing Facial Oil Lumera" },
+  { src: "/images/product_05.webp", alt: "Hydrating Repair Cream Lumera" },
+  { src: "/images/model_02.webp", alt: "Modelo Lumera con piel radiante" },
+  { src: "/images/product_03.webp", alt: "Hydrating Water Cream Lumera" },
+  { src: "/images/model_05.webp", alt: "Modelos Lumera" },
+  { src: "/images/product_02.webp", alt: "Nourishing Facial Oil Lumera" },
 ];
 
 onMounted(() => {

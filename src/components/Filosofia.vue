@@ -80,7 +80,7 @@ onUnmounted(() => {
   <section id="filosofia" data-theme="dark" class="filosofia-section">
     <div class="filosofia-deco" aria-hidden="true">
       <div class="deco deco--model">
-        <img src="/images/model_01.png" alt="" />
+        <img src="/images/model_01.webp" alt="" />
       </div>
       <div class="deco deco--aura"></div>
     </div>

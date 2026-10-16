@@ -21,7 +21,7 @@ const products: Product[] = [
     description:
       "Vitamina C estabilizada para una piel radiante desde el primer uso.",
     price: "$890",
-    image: "/images/product_01.png",
+    image: "/images/product_01.webp",
     alt: "Sérum luminoso Lumera con vitamina C",
   },
   {
@@ -30,7 +30,7 @@ const products: Product[] = [
     description:
       "Aceite facial con extractos botánicos para nutrir e iluminar.",
     price: "$1,200",
-    image: "/images/product_02.png",
+    image: "/images/product_02.webp",
     alt: "Modelo aplicando el ritual dorado Lumera",
   },
   {
@@ -39,7 +39,7 @@ const products: Product[] = [
     description:
       "Hidratación profunda con ácido hialurónico y aloe vera orgánico.",
     price: "$750",
-    image: "/images/product_03.png",
+    image: "/images/product_03.webp",
     alt: "Crema calmante Lumera con aloe vera",
   },
 ];

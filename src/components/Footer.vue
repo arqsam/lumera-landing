@@ -90,7 +90,7 @@ onUnmounted(() => {
 
     <!-- Imagen de fondo sutil -->
     <div class="footer-bg" aria-hidden="true">
-      <img src="/images/model_01.png" alt="" />
+      <img src="/images/model_01.webp" alt="" />
     </div>
 
     <!-- Overlay -->
