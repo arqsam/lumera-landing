@@ -1,6 +1,6 @@
 # 03 — Reporte de aceptación
 **Proyecto:** Lumera Landing Page  
-**Versión evaluada:** v1.0.0 + endurecimiento de portafolio (rama `chore/portfolio-hardening`)  
+**Versión evaluada:** v1.0.0 + PR #27 (`chore/portfolio-hardening`, fusionado en `main`)  
 **Fecha de redacción:** 2026-10-16  
 **Fuente de criterios:** [01-prd.md](./01-prd.md) sección 5
 
@@ -16,9 +16,9 @@ Leyenda: ✅ Cumplido · 🟡 Cumplido con desviación documentada · ⬜ Pendie
 
 | ID | Criterio | Estado | Evidencia / cómo verificar |
 |---|---|---|---|
-| CS-01 | Lighthouse ≥ 85 (Performance, Accessibility, Best Practices) | ⬜ | Correr Lighthouse (DevTools o PageSpeed Insights) sobre la URL de producción en móvil y escritorio y pegar los 3 puntajes. Antes de esta rama `public/` pesaba 40 MB; ahora 1.83 MB (ver sección 4). |
-| CS-02 | `vue-tsc -b` sin errores | ✅ en v1.0.0 · ⬜ en esta rama | **Línea base (v1.0.0, ejecutado por el autor el 2026-10-16, Windows):** `npm run build` → `vue-tsc -b` sin errores; Vite 7.0.6 transformó 369 módulos; JS 209.14 kB (gzip 80.90 kB), CSS 34.35 kB (gzip 6.18 kB), compilado en 2.77 s. **Pendiente:** repetir `npm ci && npm run build` sobre la rama y pegar la salida. |
-| CS-03 | `vitest --run` sin fallos | ✅ en v1.0.0 · ⬜ en esta rama | **Línea base (v1.0.0, ejecutado por el autor el 2026-10-16, Windows):** Vitest 3.2.4, 7 archivos y 39 tests, todos pasan (5.10 s). **Pendiente:** repetir `npm test` sobre la rama; se modificó una aserción en `Header.spec.ts` (etiqueta del botón de tienda). |
+| CS-01 | Lighthouse ≥ 85 (Performance, Accessibility, Best Practices) | ✅ | Producción, Chrome DevTools, modo **Mobile**, ventana de incógnito, 2 corridas el 2026-10-16: Performance **96**, Accessibility **89**, Best Practices **100**, SEO 100. Detalle antes/después en la sección 4.b. Accessibility pasa con margen estrecho (4 puntos). Escritorio no medido. |
+| CS-02 | `vue-tsc -b` sin errores | ✅ | `npm run build` (que ejecuta `vue-tsc -b`) pasa en el CI del PR #27 y en local (v1.0.0: 369 módulos, JS 209.14 kB / gzip 80.90 kB, CSS 34.35 kB / gzip 6.18 kB). |
+| CS-03 | `vitest --run` sin fallos | ✅ | `npm test` pasa en el CI del PR #27. Línea base local en v1.0.0: Vitest 3.2.4, 7 archivos, 39 tests, todos pasan. Se modificó una aserción en `Header.spec.ts` (etiqueta del botón de tienda). |
 | CS-04 | Sin caracteres con encoding roto | ✅ | Búsqueda de patrones de texto mal codificado (`Ã±`, `Ã­`, `â€`…) en `src/`, `index.html` y `README.md`: sin coincidencias. Las únicas ocurrencias están en `docs/00-audit.md`, como ejemplos del problema original. |
 
 ## 2. Funcionalidad
@@ -67,8 +67,30 @@ Medido sobre los archivos de `public/`:
 
 Calidad: las imágenes se compararon contra los originales con PSNR de 38.6–42.9 dB y revisión visual lado a lado; no tenían transparencia real. El video se ve ligeramente más suave en primeros planos de piel, algo que el overlay oscuro del Hero atenúa.
 
+## 4.b Resultados de Lighthouse (móvil, producción)
+
+| Categoría | Antes (producción con v1.0.0) | Después (producción tras el PR #27) |
+|---|---|---|
+| Performance | 54 (corrida incompleta: "the page loaded too slowly to finish") | **96** |
+| Accessibility | 84 | **89** |
+| Best Practices | 100 | **100** |
+| SEO | 75 | **100** |
+
+Métricas de la corrida "después": First Contentful Paint 2.1 s y Largest Contentful Paint 2.1 s.
+
+Notas de método:
+- Medido por el autor en Chrome DevTools (Lighthouse), modo Mobile, en ventana de incógnito. Los despliegues *preview* de Vercel exigen inicio de sesión, por lo que se midió producción.
+- El "antes" quedó incompleto porque la versión anterior descargaba cerca de 40 MB y excedía el límite de tiempo de la simulación móvil; debe leerse como cota inferior, no como cifra exacta.
+- Las puntuaciones de Lighthouse varían entre corridas; se reporta la captura registrada.
+
 ---
 
 ## 5. Conclusión
 
-_(Completar al cerrar la evidencia: indicar si v1.0.1 se acepta, con qué puntajes de Lighthouse y qué criterios quedan abiertos.)_
+**Aceptación parcial.** Los criterios técnicos automatizables están cumplidos: CS-01 (Lighthouse 96 / 89 / 100 en móvil), CS-02 y CS-03 (CI en verde) y CS-04 (sin texto roto), junto con los de proceso CS-10, CS-11 y CS-12.
+
+**Cumplidos con desviación documentada:** CS-08 (CTA "Descubrir" hacia Filosofía) y CS-14 (seis commits previos al proceso SDD sin referencia a Issue).
+
+**Pendientes de evidencia:** CS-05, CS-06, CS-07 y CS-09 (verificación visual y manual, con capturas) y CS-13 (captura del tablero de GitHub Projects con los Issues cerrados).
+
+**Riesgo a vigilar:** Accessibility es la categoría más cercana al umbral (89 frente a 85). Conviene revisar las auditorías fallidas del informe y corregirlas en un PR pequeño.
