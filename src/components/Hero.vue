@@ -62,7 +62,16 @@ onMounted(async () => {
 
 <template>
   <section id="hero" data-theme="dark" class="hero-section">
-    <video class="hero-video" autoplay muted loop playsinline>
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/videos/skincare_02-poster.webp"
+      aria-hidden="true"
+    >
       <source src="/videos/skincare_02.mp4" type="video/mp4" />
       Tu navegador no soporta el video.
     </video>

@@ -49,4 +49,4 @@ Vue `<Transition>` se usa únicamente para el drawer del menú mobile, donde la 
 - Todos los archivos que usan animaciones con lógica importan `gsap` directamente
 - Los tests que verifican animaciones mockean `gsap` completo (ver `src/tests/setup.ts`)
 - Las duraciones y easings siguen las convenciones definidas en `02-technical-spec.md` sección 6
-- En v2 se puede incorporar `ScrollTrigger` (plugin de GSAP) para animaciones al hacer scroll, sin cambiar la decisión base
+- `ScrollTrigger` (plugin de GSAP) se incorporó finalmente en v1.0 sin cambiar la decisión base; ver [ADR 0004](./0004-scrolltrigger-en-v1.md)

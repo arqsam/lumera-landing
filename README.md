@@ -51,13 +51,14 @@ Este proyecto no es solo código — es evidencia de un proceso de gestión prof
 ```
 docs/
 ├── 00-audit.md          # Inventario técnico del estado inicial del proyecto
-├── 01-prd.md            # PRD v1.0 con alcance, personas y criterios de aceptación
+├── 01-prd.md            # PRD v1.1 con alcance, personas y criterios de aceptación
 ├── 02-technical-spec.md # Arquitectura, convenciones, sistema de diseño
 ├── 03-acceptance-report.md
 └── adr/
     ├── 0001-gsap-animations.md   # Por qué GSAP sobre CSS animations
     ├── 0002-scss-tokens.md       # Sistema de tokens SCSS como fuente de verdad
-    └── 0003-no-router.md        # Single-page scroll vs Vue Router
+    ├── 0003-no-router.md        # Single-page scroll vs Vue Router
+    └── 0004-scrolltrigger-en-v1.md  # ScrollTrigger incorporado en v1.0
 ```
 
 ### Trazabilidad Issues → Commits
@@ -157,8 +158,9 @@ docs/*        ← documentación
 
 ## Recursos
 
-- [PRD v1.0](./docs/01-prd.md) — Product Requirements Document
+- [PRD v1.1](./docs/01-prd.md) — Product Requirements Document
 - [Spec Técnica](./docs/02-technical-spec.md) — Arquitectura y convenciones
+- [Reporte de aceptación](./docs/03-acceptance-report.md) — Evidencia de los criterios del PRD
 - [GitHub Project](https://github.com/arqsam/lumera-landing/projects) — Kanban del proyecto
 - [Demo](https://lumera-landing-lumera.vercel.app) — Sitio en producción
 
@@ -166,5 +168,5 @@ docs/*        ← documentación
 
 ## Autor
 
-**arqsam** — Fullstack Developer / Project Manager  
+**arqsam** — Frontend Developer | UX-UI Designer  
 Desarrollado con metodología Spec-Driven Development como pieza de portafolio profesional.

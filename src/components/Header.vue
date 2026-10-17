@@ -68,7 +68,7 @@ const irATienda = () => {
 
     <button
       class="header-buy-button desktop-only"
-      aria-label="bag"
+      aria-label="Ir a la tienda"
       @click="irATienda"
     >
       <div style="width: 23px; height: auto">
@@ -79,7 +79,7 @@ const irATienda = () => {
     <button
       class="header-menu-button mobile-only"
       @click="isMenuOpen = !isMenuOpen"
-      aria-label="Open menú"
+      aria-label="Abrir menú"
     >
       <EllipsisVerticalIcon class="size-6" />
     </button>
@@ -89,6 +89,7 @@ const irATienda = () => {
         <button
           class="mobile-close"
           style="margin-top: 2rem"
+          aria-label="Cerrar menú"
           @click="closeMenu"
         >
           <XMarkIcon class="size-6" />

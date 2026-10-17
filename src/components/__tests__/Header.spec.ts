@@ -51,6 +51,6 @@ describe("Header.vue", () => {
     });
     await fireEvent.mouseEnter(trigger);
 
-    expect(screen.getByRole("button", { name: /bag/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /ir a la tienda/i })).toBeInTheDocument();
   });
 });

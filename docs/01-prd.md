@@ -1,9 +1,9 @@
 # 01 — Product Requirements Document (PRD)
 **Proyecto:** Lumera Landing Page  
-**Versión:** 1.0  
+**Versión:** 1.1  
 **Fecha:** 2026-06-30  
 **Autor:** arqsam  
-**Estado:** Draft — pendiente de validación  
+**Estado:** Implementado (v1.0.0 publicada) — actualizado a v1.1 para reflejar desviaciones; ver sección 9  
 
 ---
 
@@ -68,7 +68,7 @@ Construir una landing page completa para Lumera que:
 - CMS o sistema de gestión de contenido
 - Multilenguaje (i18n)
 - Modo oscuro / claro
-- Animaciones de scroll avanzadas (ScrollTrigger de GSAP)
+- ~~Animaciones de scroll avanzadas (ScrollTrigger de GSAP)~~ → **incorporado en v1.0**, ver [ADR 0004](./adr/0004-scrolltrigger-en-v1.md)
 - SEO técnico avanzado (meta tags dinámicos, sitemap, schema.org)
 - Analytics (Google Analytics, etc.)
 
@@ -88,7 +88,7 @@ Estos criterios son la base del `03-acceptance-report.md` que se completará al 
 - [ ] **CS-05** — Las 6 secciones + Footer renderizan correctamente en desktop (≥1024px)
 - [ ] **CS-06** — Las 6 secciones + Footer renderizan correctamente en mobile (375px)
 - [ ] **CS-07** — El Header aparece/desaparece según la lógica definida en desktop y mobile
-- [ ] **CS-08** — El CTA "Explorar productos" hace scroll suave hacia la sección Tienda
+- [ ] **CS-08** — El CTA del Hero hace scroll suave hacia la sección siguiente. *(v1.1: el CTA implementado es "Descubrir" → `#filosofia`; el original era "Explorar productos" → `#tienda`)*
 - [ ] **CS-09** — El menú hamburger en mobile abre y cierra correctamente
 
 ### Proceso / portafolio
@@ -118,7 +118,7 @@ Estos criterios son la base del `03-acceptance-report.md` que se completará al 
 - Corregir encoding UTF-8 en todos los strings
 - Mover el `<Header />` de `Hero.vue` a `App.vue`
 - Refactorizar la comunicación Hero → Header usando un composable o emit
-- El CTA debe hacer scroll a `#tienda`
+- El CTA debe hacer scroll a la sección siguiente. *(v1.1: implementado como botón "Descubrir" hacia `#filosofia`; el flujo de la página es Hero → Filosofía → Tienda)*
 
 ### 7.2 Tienda
 - Grid de 3-4 producto cards
@@ -173,3 +173,4 @@ App.vue
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0 | 2026-06-30 | Documento inicial basado en auditoría `00-audit.md` |
+| 1.1 | 2026-10-16 | Se registran desviaciones detectadas en la auditoría de portafolio: (a) ScrollTrigger pasa a dentro de alcance ([ADR 0004](./adr/0004-scrolltrigger-en-v1.md)); (b) CTA del Hero es "Descubrir" → `#filosofia`; (c) orden real de secciones: Hero, Filosofía, Tienda, Galería, Gaceta, Footer. Estado pasa a "Implementado". Evidencia de criterios en [03-acceptance-report.md](./03-acceptance-report.md) |

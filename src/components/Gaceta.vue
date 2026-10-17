@@ -26,7 +26,7 @@ const articulos: Articulo[] = [
       "Descubre cómo los ingredientes activos trabajan en sincronía con tu ciclo circadiano para regenerar, nutrir e iluminar desde adentro.",
     contenido:
       "La noche es el momento en que tu piel trabaja más. Mientras duermes, el ritmo circadiano activa los mecanismos de regeneración celular, aumenta la producción de colágeno y reduce la inflamación acumulada durante el día. Una rutina nocturna bien diseñada no interrumpe este proceso — lo potencia. El primer paso es la limpieza profunda: remover no solo el maquillaje, sino los residuos de contaminación que oxidan la piel durante el día. El segundo paso es el tratamiento activo: sérum con retinol, ácidos o péptidos según tu tipo de piel. El tercer paso es el sellado: una crema nutritiva que crea una barrera que retiene la hidratación toda la noche. Con Lumera, cada paso está formulado para trabajar en armonía con tu biología.",
-    imagen: "/images/model_07.png",
+    imagen: "/images/model_07.webp",
     fecha: "12 Jun 2026",
     tiempo: "5 min",
     destacado: true,
@@ -40,7 +40,7 @@ const articulos: Articulo[] = [
       "No todas las formas de vitamina C son iguales. Te explicamos cuál es la más estable y por qué marca la diferencia en tu piel.",
     contenido:
       "El ácido ascórbico puro es la forma más potente de vitamina C, pero también la más inestable. Se oxida con la luz y el aire, perdiendo eficacia antes de llegar a tu piel. Por eso en Lumera optamos por el ascorbil glucósido: una forma estable que se convierte en vitamina C activa al contacto con la piel, con una penetración más profunda y sin irritación. Los resultados son visibles desde la primera semana: tono más uniforme, manchas más claras y una luminosidad que no viene de un filtro — viene de adentro.",
-    imagen: "/images/product_06.png",
+    imagen: "/images/product_06.webp",
     fecha: "5 Jun 2026",
     tiempo: "4 min",
     destacado: false,
@@ -53,7 +53,7 @@ const articulos: Articulo[] = [
       "Convertir el cuidado de la piel en un momento de atención plena no es un lujo — es una práctica que cambia cómo te relacionas contigo misma.",
     contenido:
       "La mayoría aplicamos nuestros productos apuradas, pensando en lo que sigue. Pero el tacto consciente sobre la piel activa el sistema nervioso parasimpático — el de la calma. Cuando masajeas un sérum con intención, cuando respiras el aroma de una crema, cuando notas la temperatura de tus manos sobre tu rostro, estás practicando presencia. Y esa presencia tiene efectos reales: reduce el cortisol, mejora la circulación facial y hace que los ingredientes penetren mejor. La próxima vez que abras un producto Lumera, date dos minutos. Solo dos. Tu piel y tu mente lo van a notar.",
-    imagen: "/images/model_06.png",
+    imagen: "/images/model_06.webp",
     fecha: "28 May 2026",
     tiempo: "6 min",
     destacado: false,
