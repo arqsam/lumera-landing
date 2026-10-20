@@ -165,7 +165,10 @@ onUnmounted(() => {
 
 .filosofia-section {
   position: relative;
-  height: 100vh;
+  // Móvil/tablet: el contenido se apila y puede superar la altura de la
+  // pantalla, así que la sección crece en vez de recortarlo (overflow: hidden).
+  min-height: 100vh;
+  min-height: 100svh;
   background-color: $color-primary;
   display: flex;
   align-items: stretch;
@@ -189,6 +192,11 @@ onUnmounted(() => {
     filter: blur(70px);
     pointer-events: none;
     z-index: 0;
+  }
+
+  // Escritorio: layout de 3 columnas a altura de pantalla completa
+  @media (min-width: $breakpoint-lg) {
+    height: 100vh;
   }
 }
 
