@@ -85,6 +85,9 @@ onUnmounted(() => {
       <div class="deco deco--aura"></div>
     </div>
 
+    <!-- Encabezado de sección solo para lectores de pantalla (orden h1 > h2 > h3) -->
+    <h2 class="visually-hidden">Pilares de la marca</h2>
+
     <!-- Layout de 3 columnas -->
     <div class="filosofia-content">
       <!-- Columna izquierda: eyebrow + frase rotativa -->
@@ -165,7 +168,10 @@ onUnmounted(() => {
 
 .filosofia-section {
   position: relative;
-  height: 100vh;
+  // Móvil/tablet: el contenido se apila y puede superar la altura de la
+  // pantalla, así que la sección crece en vez de recortarlo (overflow: hidden).
+  min-height: 100vh;
+  min-height: 100svh;
   background-color: $color-primary;
   display: flex;
   align-items: stretch;
@@ -189,6 +195,11 @@ onUnmounted(() => {
     filter: blur(70px);
     pointer-events: none;
     z-index: 0;
+  }
+
+  // Escritorio: layout de 3 columnas a altura de pantalla completa
+  @media (min-width: $breakpoint-lg) {
+    height: 100vh;
   }
 }
 
@@ -263,23 +274,48 @@ onUnmounted(() => {
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
 }
 
+// Texto accesible solo para lectores de pantalla
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .filosofia-dots {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
 }
 
+// El botón mide 24×24 px (objetivo táctil mínimo); el punto visible se dibuja con ::before
 .filosofia-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background-color: rgba($color-light, 0.2);
-  border: none;
-  cursor: pointer;
-  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
   padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 
-  &--active {
+  &::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: rgba($color-light, 0.2);
+    transition: all 0.4s ease;
+  }
+
+  &--active::before {
     background-color: $color-secondary;
     width: 20px;
   }

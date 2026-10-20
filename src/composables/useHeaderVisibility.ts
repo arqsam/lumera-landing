@@ -29,9 +29,14 @@ export function useHeaderVisibility() {
     );
     if (hero) styleObserver.observe(hero);
 
-    // Observer 2: detecta qué sección está en el viewport
-    // y lee su data-theme para adaptar el color del header
-    const sections = document.querySelectorAll("section[data-theme]");
+    // Observer 2: detecta qué sección está bajo el header
+    // y lee su data-theme para adaptar el color del header.
+    // Se usa una franja delgada (entre el 5% y el 10% del alto del viewport,
+    // donde queda el header) en vez de un umbral de visibilidad: con
+    // threshold 0.5 una sección más alta que dos pantallas (p. ej. Tienda en
+    // móvil) nunca alcanzaba el 50% visible y el header conservaba el tema
+    // de la sección anterior.
+    const sections = document.querySelectorAll("[data-theme]");
     themeObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -41,7 +46,7 @@ export function useHeaderVisibility() {
           }
         });
       },
-      { threshold: 0.5 },
+      { rootMargin: "-5% 0px -90% 0px", threshold: 0 },
     );
     sections.forEach((section) => themeObserver!.observe(section));
 

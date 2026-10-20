@@ -197,7 +197,7 @@ onMounted(async () => {
 
 .hero-button {
   background-color: $color-gray-light-ultra;
-  color: $color-gray-medium;
+  color: $color-gray-dark; // contraste 8.5:1 (antes $color-gray-medium, 3.3:1)
   padding: 0.75rem 2rem;
   border-radius: 9999px;
   font-family: $font-main;
