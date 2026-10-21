@@ -1,7 +1,7 @@
 # 03 — Reporte de aceptación
 **Proyecto:** Lumera Landing Page  
-**Versión evaluada:** v1.0.0 + PR #27 (`chore/portfolio-hardening`) + rama `fix/mobile-layout-a11y` (revisión visual, 2026-10-19)  
-**Fecha de redacción:** 2026-10-16 · **Actualizado:** 2026-10-19  
+**Versión evaluada:** v1.0.0 + PR #27 (`chore/portfolio-hardening`) + PR #29 y #30 (revisión visual y correcciones, fusionados en `main`)  
+**Fecha de redacción:** 2026-10-16 · **Actualizado:** 2026-10-20  
 **Fuente de criterios:** [01-prd.md](./01-prd.md) sección 5
 
 > **Cómo leer este reporte.** Cada criterio tiene un estado y la evidencia que lo respalda.
@@ -16,7 +16,7 @@ Leyenda: ✅ Cumplido · 🟡 Cumplido con desviación documentada · ⬜ Pendie
 
 | ID | Criterio | Estado | Evidencia / cómo verificar |
 |---|---|---|---|
-| CS-01 | Lighthouse ≥ 85 (Performance, Accessibility, Best Practices) | ✅ | Producción, Chrome DevTools, modo **Mobile**, ventana de incógnito, 2 corridas el 2026-10-16: Performance **96** y **95**, Accessibility **89**, Best Practices **100**, SEO 100. FCP 2.1–2.3 s, LCP 2.1–2.4 s, TBT 0 ms, CLS 0, Speed Index 3.1 s. Detalle antes/después en la sección 4.b. Accessibility pasa con margen estrecho (4 puntos). Escritorio no medido. |
+| CS-01 | Lighthouse ≥ 85 (Performance, Accessibility, Best Practices) | ✅ | Producción, Chrome DevTools, modo **Mobile**, incógnito. Tras el PR #27: Performance 95–96, Accessibility 89. Tras los PR #29/#30 (2026-10-20): Performance **89–94** (varía entre corridas; la mayoría 92–94), Accessibility **100**, Best Practices **100**, SEO **100**. Métricas de una corrida: FCP 2.1 s, LCP 3.1 s, TBT 200 ms, CLS 0, SI 2.6 s. Escritorio no medido. |
 | CS-02 | `vue-tsc -b` sin errores | ✅ | `npm run build` (que ejecuta `vue-tsc -b`) pasa en el CI del PR #27 y en local (v1.0.0: 369 módulos, JS 209.14 kB / gzip 80.90 kB, CSS 34.35 kB / gzip 6.18 kB). |
 | CS-03 | `vitest --run` sin fallos | ✅ | `npm test` pasa en el CI del PR #27. Línea base local en v1.0.0: Vitest 3.2.4, 7 archivos, 39 tests, todos pasan. Se modificó una aserción en `Header.spec.ts` (etiqueta del botón de tienda). |
 | CS-04 | Sin caracteres con encoding roto | ✅ | Búsqueda de patrones de texto mal codificado (`Ã±`, `Ã­`, `â€`…) en `src/`, `index.html` y `README.md`: sin coincidencias. Las únicas ocurrencias están en `docs/00-audit.md`, como ejemplos del problema original. |
@@ -26,10 +26,10 @@ Leyenda: ✅ Cumplido · 🟡 Cumplido con desviación documentada · ⬜ Pendie
 | ID | Criterio | Estado | Evidencia / cómo verificar |
 |---|---|---|---|
 | CS-05 | 6 secciones + Footer en escritorio (≥ 1024 px) | ✅ | Revisión visual por el autor con capturas de escritorio el 2026-10-19: sin defectos reportados. Orden en `App.vue`: Hero, Filosofía, Tienda, Galería, Gaceta, Footer. |
-| CS-06 | 6 secciones + Footer en móvil (375 px) | ⬜ | La revisión del 2026-10-19 halló dos defectos (H-1 Filosofía, H-2 Header en Tienda), corregidos en `fix/mobile-layout-a11y`. Falta repetir la revisión a 375 px tras el fix e incluir capturas de Gaceta y Footer, que no se revisaron. |
-| CS-07 | El Header aparece/desaparece según la lógica definida | ⬜ | **Sin cobertura automática:** `Header.spec.ts` solo prueba el logo, los links y el botón de tienda, no la lógica de visibilidad (`useHeaderVisibility.ts`). Se añadió `useHeaderVisibility.spec.ts` (5 tests del observador de tema) en `fix/mobile-layout-a11y`. Revisión en móvil (2026-10-19/20): el header se ve correcto en Gaceta; en el Footer debía ocultarse y no lo hacía (H-3, corregido con un observador del footer y 2 tests). Falta reverificar en móvil y escritorio. |
+| CS-06 | 6 secciones + Footer en móvil (375 px) | ✅ | Revisión visual a 375 px el 2026-10-19/20. Defectos H-1, H-2 y H-3 corregidos (sección 2.c) y reverificados por el autor tras el merge del PR #30. |
+| CS-07 | El Header aparece/desaparece según la lógica definida | ✅ | Cobertura automática: `useHeaderVisibility.spec.ts` (7 tests: tema por sección, footer, ocultar/mostrar). Verificación manual en móvil: tema correcto en Tienda y Gaceta, oculto en el footer. **No verificado manualmente en escritorio.** |
 | CS-08 | El CTA del Hero hace scroll suave | 🟡 | **Desviación:** la spec pedía un CTA "Explorar productos" hacia Tienda. La implementación tiene el botón "Descubrir", que baja a `#filosofia` (`Hero.vue`). Registrada en PRD v1.1 sección 9. Falta confirmar el scroll en el navegador. |
-| CS-09 | El menú hamburger móvil abre y cierra | ⬜ | Verificación manual a 375 px: abrir con "Abrir menú" y cerrar con "Cerrar menú". |
+| CS-09 | El menú hamburger móvil abre y cierra | ✅ | Verificado manualmente a 375 px el 2026-10-20: abre con "Abrir menú" y cierra con "Cerrar menú". |
 
 ## 3. Proceso / portafolio
 
@@ -99,12 +99,10 @@ Notas de método:
 
 ## 5. Conclusión
 
-**Aceptación parcial.** Los criterios técnicos automatizables están cumplidos: CS-01 (Lighthouse 96 / 89 / 100 en móvil), CS-02 y CS-03 (CI en verde) y CS-04 (sin texto roto), junto con los de proceso CS-10, CS-11 y CS-12.
+**Aceptado.** Cumplidos: CS-01 a CS-07, CS-09 a CS-13. CS-08 y CS-14 cumplidos con desviación documentada (CTA "Descubrir" hacia Filosofía; seis commits previos al proceso SDD sin Issue).
 
-**Cumplidos con desviación documentada:** CS-08 (CTA "Descubrir" hacia Filosofía) y CS-14 (seis commits previos al proceso SDD sin referencia a Issue).
-
-**Cumplidos tras esta revisión:** CS-05 (escritorio) y CS-13 (tablero).
-
-**Pendientes de evidencia:** CS-06 y CS-07 (repetir a 375 px tras los fixes H-1 y H-2, con Gaceta y Footer) y CS-09 (menú móvil abrir/cerrar).
-
-**Riesgo a vigilar:** Accessibility es la categoría más cercana al umbral (89 frente a 85). Conviene revisar las auditorías fallidas del informe y corregirlas en un PR pequeño.
+**Limitaciones conocidas:**
+- El header no se verificó manualmente en escritorio (tema y ocultación en el footer).
+- Lighthouse solo se midió en móvil; Performance oscila entre 89 y 94, por encima del umbral de 85 pero con poco margen en las corridas bajas.
+- `$color-secondary` (#be8e6b) sobre blanco da 2.89:1 de contraste; Lighthouse ya marca Accessibility 100, pero conviene un tono de texto más oscuro (≈ #8f6140) si se busca AA estricto.
+- Oportunidades de rendimiento abiertas: CSS que bloquea el render (≈ 450 ms) y entrega de imágenes (≈ 457 KiB).
