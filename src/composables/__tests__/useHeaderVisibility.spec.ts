@@ -80,6 +80,7 @@ describe("useHeaderVisibility — tema del header", () => {
       <section id="hero" data-theme="dark"></section>
       <section id="tienda" data-theme="light"></section>
       <footer id="footer" data-theme="dark"></footer>
+      <button class="hero-button"></button>
     `;
     const wrapper = mount(Probe);
     unmountProbe = () => wrapper.unmount();
@@ -120,5 +121,62 @@ describe("useHeaderVisibility — tema del header", () => {
   it("ignora las entradas que dejan de intersectar", () => {
     crossBand(document.getElementById("tienda"), false);
     expect(getState().isDarkSection.value).toBe(true);
+  });
+});
+
+describe("useHeaderVisibility — ocultar en el footer", () => {
+  function getFooterObserver(): ObserverRecord {
+    const found = records.find(
+      (record) =>
+        record.targets.length === 1 && record.targets[0].id === "footer",
+    );
+    if (!found) throw new Error("No se creó el observador del footer");
+    return found;
+  }
+
+  function footerBand(isIntersecting: boolean) {
+    const footer = document.getElementById("footer");
+    if (!footer) throw new Error("Footer no encontrado");
+    getFooterObserver().callback(
+      [entry(footer, isIntersecting)],
+      {} as IntersectionObserver,
+    );
+  }
+
+  beforeEach(() => {
+    records.length = 0;
+    window.IntersectionObserver =
+      FakeIntersectionObserver as unknown as typeof IntersectionObserver;
+    document.body.innerHTML = `
+      <section id="hero" data-theme="dark"></section>
+      <footer id="footer" data-theme="dark"></footer>
+      <button class="hero-button"></button>
+    `;
+    const wrapper = mount(Probe);
+    unmountProbe = () => wrapper.unmount();
+    // Primera aparición en escritorio: hover sobre el botón del Hero
+    document
+      .querySelector(".hero-button")
+      ?.dispatchEvent(new Event("mouseenter"));
+  });
+
+  afterEach(() => {
+    unmountProbe?.();
+    unmountProbe = undefined;
+    state = undefined;
+    window.IntersectionObserver = originalObserver;
+    document.body.innerHTML = "";
+  });
+
+  it("el header es visible tras su primera aparición", () => {
+    expect(getState().isVisible.value).toBe(true);
+  });
+
+  it("se oculta cuando el footer llega a la zona del header y reaparece al salir", () => {
+    footerBand(true);
+    expect(getState().isVisible.value).toBe(false);
+
+    footerBand(false);
+    expect(getState().isVisible.value).toBe(true);
   });
 });

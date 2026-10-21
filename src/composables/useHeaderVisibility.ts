@@ -1,7 +1,10 @@
-import { ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 
 export function useHeaderVisibility() {
-  const isVisible = ref(false);
+  const hasBeenShown = ref(false);
+  const isInFooter = ref(false);
+  // El header se oculta mientras el footer ocupa la zona del header
+  const isVisible = computed(() => hasBeenShown.value && !isInFooter.value);
   const hasAppeared = ref(false);
   const isPastHero = ref(false);
   const isDarkSection = ref(true); // hero es dark por defecto
@@ -9,10 +12,11 @@ export function useHeaderVisibility() {
   let visibilityObserver: IntersectionObserver | null = null;
   let styleObserver: IntersectionObserver | null = null;
   let themeObserver: IntersectionObserver | null = null;
+  let footerObserver: IntersectionObserver | null = null;
   let scrollHandler: ((...args: unknown[]) => void) | null = null;
 
   const show = () => {
-    isVisible.value = true;
+    hasBeenShown.value = true;
     hasAppeared.value = true;
   };
 
@@ -49,6 +53,22 @@ export function useHeaderVisibility() {
       { rootMargin: "-5% 0px -90% 0px", threshold: 0 },
     );
     sections.forEach((section) => themeObserver!.observe(section));
+
+    // Observer 3: oculta el header cuando el footer llega a la zona superior
+    // (el footer ya trae su propia navegación). Franja de 96 px bajo el borde
+    // superior del viewport: el margen inferior deja solo esa franja.
+    const footer = document.querySelector("#footer");
+    if (footer) {
+      const bandPx = 96;
+      const bottomMargin = Math.max(window.innerHeight - bandPx, 0);
+      footerObserver = new IntersectionObserver(
+        (entries) => {
+          isInFooter.value = entries[entries.length - 1].isIntersecting;
+        },
+        { rootMargin: `0px 0px -${bottomMargin}px 0px`, threshold: 0 },
+      );
+      footerObserver.observe(footer);
+    }
 
     if (window.innerWidth < 768) {
       // Mobile: aparece con delay o al hacer scroll
@@ -100,6 +120,10 @@ export function useHeaderVisibility() {
     if (themeObserver) {
       themeObserver.disconnect();
       themeObserver = null;
+    }
+    if (footerObserver) {
+      footerObserver.disconnect();
+      footerObserver = null;
     }
     if (scrollHandler) {
       window.removeEventListener("scroll", scrollHandler);
