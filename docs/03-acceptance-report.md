@@ -27,7 +27,7 @@ Leyenda: ✅ Cumplido · 🟡 Cumplido con desviación documentada · ⬜ Pendie
 |---|---|---|---|
 | CS-05 | 6 secciones + Footer en escritorio (≥ 1024 px) | ✅ | Revisión visual por el autor con capturas de escritorio el 2026-10-19: sin defectos reportados. Orden en `App.vue`: Hero, Filosofía, Tienda, Galería, Gaceta, Footer. |
 | CS-06 | 6 secciones + Footer en móvil (375 px) | ⬜ | La revisión del 2026-10-19 halló dos defectos (H-1 Filosofía, H-2 Header en Tienda), corregidos en `fix/mobile-layout-a11y`. Falta repetir la revisión a 375 px tras el fix e incluir capturas de Gaceta y Footer, que no se revisaron. |
-| CS-07 | El Header aparece/desaparece según la lógica definida | ⬜ | **Sin cobertura automática:** `Header.spec.ts` solo prueba el logo, los links y el botón de tienda, no la lógica de visibilidad (`useHeaderVisibility.ts`). Se añadió `useHeaderVisibility.spec.ts` (5 tests del observador de tema) en `fix/mobile-layout-a11y`. Falta verificar manualmente en móvil (defecto H-2 corregido). |
+| CS-07 | El Header aparece/desaparece según la lógica definida | ⬜ | **Sin cobertura automática:** `Header.spec.ts` solo prueba el logo, los links y el botón de tienda, no la lógica de visibilidad (`useHeaderVisibility.ts`). Se añadió `useHeaderVisibility.spec.ts` (5 tests del observador de tema) en `fix/mobile-layout-a11y`. Revisión en móvil (2026-10-19/20): el header se ve correcto en Gaceta; en el Footer debía ocultarse y no lo hacía (H-3, corregido con un observador del footer y 2 tests). Falta reverificar en móvil y escritorio. |
 | CS-08 | El CTA del Hero hace scroll suave | 🟡 | **Desviación:** la spec pedía un CTA "Explorar productos" hacia Tienda. La implementación tiene el botón "Descubrir", que baja a `#filosofia` (`Hero.vue`). Registrada en PRD v1.1 sección 9. Falta confirmar el scroll en el navegador. |
 | CS-09 | El menú hamburger móvil abre y cierra | ⬜ | Verificación manual a 375 px: abrir con "Abrir menú" y cerrar con "Cerrar menú". |
 
@@ -57,6 +57,7 @@ Leyenda: ✅ Cumplido · 🟡 Cumplido con desviación documentada · ⬜ Pendie
 |---|---|---|---|---|
 | H-1 | Filosofía, móvil | La sección siguiente tapa parte de la card informativa | `height: 100vh` con `overflow: hidden`: el contenido apilado supera la pantalla y se recorta | `min-height: 100svh` en móvil/tablet; altura fija solo desde `$breakpoint-lg` |
 | H-2 | Tienda, móvil | El Header no cambia al tema claro y se ve como en el Hero | El observador usaba `threshold: 0.5`; Tienda mide más de 2 pantallas y nunca llega al 50 % visible | Franja bajo el header (`rootMargin: "-5% 0px -90% 0px"`, `threshold: 0`); el Footer también se observa; test añadido |
+| H-3 | Footer, móvil | El header seguía visible sobre el footer | `useHeaderVisibility` nunca ocultaba el header tras su primera aparición | Observador del footer sobre una franja de 96 px superior; el header se oculta al entrar y reaparece al salir |
 
 Corrección de accesibilidad incluida: texto del botón del Hero de 3.3:1 a 8.5:1 de contraste, h2 oculto en Filosofía (orden h1 > h2 > h3) y puntos de paginación de 24×24 px.
 
